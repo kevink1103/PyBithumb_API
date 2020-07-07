@@ -75,7 +75,7 @@ class BithumbPublicAPI:
     @staticmethod
     def orderbook(order_currency="BTC", payment_currency="KRW", count=30):
         """
-        요청 당시 빗썸 거래소 가상자산 현재가 정보를 제공합니다..
+        요청 당시 빗썸 거래소 가상자산 현재가 정보를 제공합니다.
         """
         path = f"/public/orderbook/{order_currency}_{payment_currency}?count={count}"
         return BithumbAPI().get(path)
@@ -99,7 +99,7 @@ class BithumbPublicAPI:
     @staticmethod
     def btci():
         """
-        빗썸 지수 (BTMI,BTAI) 정보를 제공합니다..
+        빗썸 지수 (BTMI,BTAI) 정보를 제공합니다.
         """
         path = "/public/btci"
         return BithumbAPI().get(path)
@@ -187,7 +187,7 @@ class BithumbPrivateAPI:
         """
         회원의 매수/매도 체결 내역 상세 정보를 제공합니다.
         """
-        path = "info/order_detail"
+        path = "/info/order_detail"
         payload = {
             "order_id": order_id,
             "order_currency": order_currency,
@@ -195,18 +195,17 @@ class BithumbPrivateAPI:
         }
         return self.bithumb_api.post(path, payload)
     
-    # NEED TO BE FIXED
     def info_user_transactions(self, order_currency, payment_currency="KRW", offset=0, count=20, searchGb=0):
         """
         회원의 거래 완료 내역 정보를 제공합니다.
         """
-        path = "info/user_transactions"
+        path = "/info/user_transactions"
         payload = {
-            # "order_currency": order_currency,
-            # "payment_currency": payment_currency,
-            # "offset": offset,
-            # "count": count,
-            # "searchGb": searchGb
+            "order_currency": order_currency,
+            "payment_currency": payment_currency,
+            "offset": offset,
+            "count": count,
+            "searchGb": searchGb
         }
         return self.bithumb_api.post(path, payload)
 
