@@ -44,14 +44,12 @@ class BithumbAPI:
         }
 
         response = requests.post(uri, headers=headers, data=payload)
-        if response.status_code != 200:
-            raise Exception(f"post({path}) failed (status code: {response.status_code})")
         
         json_data = json.loads(response.text)
         if "status" in json_data and json_data["status"] == "0000":
             return json_data
         else:
-            raise Exception(f"post({path}) failed (bithumb code: {json_data['status']}, message: {json_data['message']}) https://apidocs.bithumb.com/docs/err_code")
+            raise Exception(f"post({path}) failed (status code: {response.status_code}) (bithumb code: {json_data['status']}, message: {json_data['message']}) https://apidocs.bithumb.com/docs/err_code")
     
     def signature(self, path, payload, nonce):
         """
